@@ -197,10 +197,10 @@ MIT License - Feel free to use this template for your own portfolio!
 ## 👨‍💻 Developer
 
 **Abdelrahman Al Shkh Nimer**
-- Email: abdalrahmab@yahoo.com
-- Phone: +962 79 733 9217
+- Email: mohammed.n.jumaa@gmail.com
+- Phone: +962 787665773
 - Location: Amman, Jordan
 
 ---
 
-Made with ❤️ and React# Abdelrahman_portfolio
+Made with ❤️ and React# 
