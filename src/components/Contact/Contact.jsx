@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaEnvelope, 
   FaPhone, 
   FaMapMarkerAlt, 
   FaLinkedin, 
   FaGithub, 
-  FaPaperPlane 
+  FaPaperPlane,
+  FaCheckCircle,
+  FaTimes
 } from 'react-icons/fa';
 import './Contact.css';
 
@@ -16,6 +18,7 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,8 +31,13 @@ const Contact = () => {
     e.preventDefault();
     // Handle form submission logic here
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! I will get back to you soon.');
+    setShowSuccess(true);
     setFormData({ name: '', email: '', message: '' });
+    
+    // Hide success message after 5 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 5000);
   };
 
   const contactInfo = [
@@ -79,6 +87,42 @@ const Contact = () => {
         >
           Have a project in mind? Let's work together
         </motion.p>
+
+        {/* Success Message */}
+        <AnimatePresence>
+          {showSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -50, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -50, scale: 0.8 }}
+              className="success-message"
+            >
+              <div className="success-content">
+                <div className="success-icon">
+                  <FaCheckCircle />
+                </div>
+                <div className="success-text">
+                  <h3>Message Sent Successfully!</h3>
+                  <p>Thank you for reaching out. I'll get back to you within 24 hours.</p>
+                </div>
+                <button 
+                  className="close-btn"
+                  onClick={() => setShowSuccess(false)}
+                >
+                  <FaTimes />
+                </button>
+              </div>
+              <div className="success-progress">
+                <motion.div 
+                  className="progress-bar"
+                  initial={{ width: '100%' }}
+                  animate={{ width: '0%' }}
+                  transition={{ duration: 5, ease: "linear" }}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="contact-content">
           <motion.div
